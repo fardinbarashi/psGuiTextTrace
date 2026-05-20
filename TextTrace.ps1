@@ -670,7 +670,7 @@ $CmOpenReports.Add_Click({ Open-ReportsFolder })
 $MenuExit.Add_Click({ $Window.Close() })
 
 $MenuAbout.Add_Click({
-    Show-Message -Message "Text-Trace github link : https://github.com/Text-Trace" -Title 'About' -Icon 'Information'
+    Show-Message -Message "Text-Trace github link : https://github.com/fardinbarashi/psGuiTextTrace" -Title 'About' -Icon 'Information'
 })
 
 $CmOpenFile.Add_Click({
