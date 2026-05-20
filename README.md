@@ -7,16 +7,8 @@ It is built with **PowerShell**, **WPF**, and **XAML**, and is designed for fast
 ---
 
 ## Table of Contents
-
 - [Features](#features)
 - [Screenshots](#screenshots)
-- [Supported File Types](#supported-file-types)
-- [Regex Examples](#regex-examples)
-- [Reports](#reports)
-
-- [Roadmap](#roadmap)
-- [License](#license)
-
 ---
 
 ## Features
@@ -37,20 +29,30 @@ It is built with **PowerShell**, **WPF**, and **XAML**, and is designed for fast
 
 ## Screenshots
 
-![](assets/1.jpg)
-![](assets/2.jpg)
-![](assets/3.jpg)
-![](assets/4.jpg)
-![](assets/5.jpg)
+![](Assets/1.jpg)
 
+```
+When matches are found, TextTrace exports the results to a CSV file.
+Default location: Files\Reports\Report.csv
+- UTF-8 encoding
+- Semicolon delimiter
+- No type information
 
+Report columns:
+
+| Column | Description |
+|---|---|
+| FileName | Name of the matched file |
+| LineNumber | Line number where the match was found |
+| Line | Full matching line |
+| Path | Full path to the matched file |
 
 ---
 
-## Supported File Types
+```
+![](Assets/2.jpg)
 
 TextTrace includes these file patterns by default:
-
 ```text
 *.xml
 *.txt
@@ -74,9 +76,10 @@ You can also add custom file patterns in the application.
 ```
 Example: *.cs,*.js,*.vbs,*.properties
 ```
+![](Assets/3.jpg)
 
----
-## Result Actions
+![](Assets/4.jpg)
+
 ```
 Right-click a result row to access available actions:
 | Action | Description |
@@ -87,11 +90,15 @@ Right-click a result row to access available actions:
 | Copy Path | Copies the full file path to the clipboard |
 | Open Reports Folder | Opens the report output folder |
 ```
+![](Assets/5.jpg)
+
 
 ---
 ## Regex Examples
-Enable **Use Regex** before using regex patterns.
 ```
+Enable **Use Regex** before using regex patterns.
+Make sure the pattern is valid .NET regular expression syntax.
+Examples : 
 Find the word `test` anywhere in a line: test
 Find the exact word `test`: \btest\b
 Find either `error` or `warning`: error|warning
@@ -102,37 +109,8 @@ Find XML-like tags: <[^>]+>
 Find email addresses:\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
 ```
 
-## Reports
-When matches are found, TextTrace exports the results to a CSV file.
-```
-Default location: Files\Reports\Report.csv
-```
-
-The report is saved using:
-```
-- UTF-8 encoding
-- Semicolon delimiter
-- No type information
-```
-Report columns:
-```
-| Column | Description |
-|---|---|
-| FileName | Name of the matched file |
-| LineNumber | Line number where the match was found |
-| Line | Full matching line |
-| Path | Full path to the matched file |
-```
----
-
 TextTrace creates transcript logs for troubleshooting.
 TextTrace automatically creates missing `Logs` and `Files\Reports` folders.
-
----
-
-
-### Regex search fails
-Make sure the pattern is valid .NET regular expression syntax.
 
 ## Performance Notes
 TextTrace works best with text-based files. Very large folders or very large files may take longer to scan.
