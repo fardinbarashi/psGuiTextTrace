@@ -1,0 +1,6 @@
+name: example-yml
+description: Detta är ett test i YML
+words:
+  - alpha
+  - beta
+  - gamma
