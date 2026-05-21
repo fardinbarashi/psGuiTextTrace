@@ -116,4 +116,11 @@ TextTrace automatically creates missing `Logs` and `Files\Reports` folders.
 TextTrace works best with text-based files. Very large folders or very large files may take longer to scan.
 ```
 
+## Roadmap
+```
+Add more options to export reports
+- Export as Json
+- Export as html
+```
+
 
