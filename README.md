@@ -109,9 +109,11 @@ Find XML-like tags: <[^>]+>
 Find email addresses:\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
 ```
 
+## Performance Notes
+```
 TextTrace creates transcript logs for troubleshooting.
 TextTrace automatically creates missing `Logs` and `Files\Reports` folders.
-
-## Performance Notes
 TextTrace works best with text-based files. Very large folders or very large files may take longer to scan.
+```
+
 
