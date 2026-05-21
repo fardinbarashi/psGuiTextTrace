@@ -2,7 +2,7 @@
 
 **TextTrace** is a modern Windows desktop tool for searching text and regex patterns across multiple file types.
 
-It is built with **PowerShell**, **WPF**, and **XAML**, and is designed for fast inspection of logs, scripts, configuration files, documentation, SQL files, JSON, XML, and other text-based files.
+It is built with **PowerShell** and **XAML**, and is designed for fast inspection of logs, scripts, configuration files, documentation, SQL files, JSON, XML, and other text-based files.
 
 ---
 
