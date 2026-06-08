@@ -118,9 +118,9 @@ TextTrace works best with text-based files. Very large folders or very large fil
 
 ## Roadmap
 ```
-Add more options to export reports
-- Export as Json
-- Export as html
+- Add more options to export reports as Json and html
+- Search in cert.msc
+- Search in regedit
 ```
 
 
