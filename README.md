@@ -9,6 +9,11 @@ It is built with **PowerShell** and **XAML**, and is designed for fast inspectio
 ## Table of Contents
 - [Features](#features)
 - [Screenshots](#screenshots)
+- [Regex Examples](#RegexExamples)
+- [News](#News)
+- [Performance Notes](#PerformanceNotes)
+- [Roadmap](#Roadmap)
+
 ---
 
 ## Features
@@ -94,7 +99,7 @@ Right-click a result row to access available actions:
 
 
 ---
-## Regex Examples
+## RegexExamples
 ```
 Enable **Use Regex** before using regex patterns.
 Make sure the pattern is valid .NET regular expression syntax.
@@ -108,8 +113,18 @@ Find PowerShell variables: \$[A-Za-z_][A-Za-z0-9_]*
 Find XML-like tags: <[^>]+>
 Find email addresses:\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
 ```
+## News
+```
+1.1 :
+Added support for searching within the Windows Registry and Certificate Stores, allowing users to find specific keys, values, or certificates based on their search criteria.
+Added support for exporting search results to JSON and HTML formats, in addition to CSV, providing users with more options for analyzing and sharing their findings.
+```
+![](Assets/111.jpg)
+![](Assets/112.jpg)
+![](Assets/113.jpg)
+![](Assets/114.jpg)
 
-## Performance Notes
+## PerformanceNotes
 ```
 TextTrace creates transcript logs for troubleshooting.
 TextTrace automatically creates missing `Logs` and `Files\Reports` folders.
