@@ -128,14 +128,13 @@ Added support for exporting search results to JSON and HTML formats, in addition
 ```
 TextTrace creates transcript logs for troubleshooting.
 TextTrace automatically creates missing `Logs` and `Files\Reports` folders.
-TextTrace works best with text-based files. Very large folders or very large files may take longer to scan.
+TextTrace works best with text-based files. 
+Very large folders or very large files may take longer to scan.
 ```
 
 ## Roadmap
 ```
-- Add more options to export reports as Json and html
-- Search in cert.msc
-- Search in regedit
+
 ```
 
 
