@@ -1,4 +1,6 @@
 # TextTrace
+![](Assets/texttracelogo.png)
+
 
 **TextTrace** is a modern Windows desktop tool for searching text and regex patterns across multiple file types.
 
