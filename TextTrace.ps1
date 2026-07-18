@@ -50,7 +50,7 @@ if (-not (Get-Command Start-ThreadJob -ErrorAction SilentlyContinue)) {
 
 $ScriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
 
-$LogsFolder     = Join-Path $ScriptRoot 'Files\Logs'
+$LogsFolder     = Join-Path $ScriptRoot 'Settings\Logs'
 $ReportsFolder  = Join-Path $ScriptRoot 'Files\Reports'
 $IconPath       = Join-Path $ScriptRoot 'Files\Img\logo\logo.ico'
 $ReportFile     = Join-Path $ReportsFolder 'Report.csv'
