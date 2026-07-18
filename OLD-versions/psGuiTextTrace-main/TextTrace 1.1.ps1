@@ -25,8 +25,6 @@ Added support for exporting search results to JSON and HTML formats, in addition
 
 #>
 
-Set-StrictMode -Version Latest
-
 # --- Assemblies ---
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
