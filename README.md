@@ -7,8 +7,6 @@
 It is built with **PowerShell** and **XAML**, and is designed for fast inspection of logs, scripts, configuration files, documentation, SQL files, JSON, XML, and other text-based files.
 
 ## News :
-
-
 ### 1.3
 ```
 Must have PowerShell 7.4.0 or later (Core)
@@ -31,7 +29,7 @@ Better code in the man script
 ```
 | Requirement | Detail |
 |-------------|--------|
-| PowerShell | **7.4.0 or later (Core)**.
+| PowerShell | 7.4.0 or later (Core).
 ```
 
 
