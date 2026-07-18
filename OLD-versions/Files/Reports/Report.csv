@@ -1,0 +1,4 @@
+﻿"FileName";"LineNumber";"Line";"Path"
+"example.txt";"1";"Detta är en testfil.";"C:\Users\fardi\Desktop\Upload to github\psGuiTextTrace\FilePatternLookup_TestFiles\example.txt"
+"example.txt";"2";"Här finns ordet test tillsammans med lite andra ord.";"C:\Users\fardi\Desktop\Upload to github\psGuiTextTrace\FilePatternLookup_TestFiles\example.txt"
+"nested_test.txt";"1";"Detta är ett test i en undermapp för att testa Include subfolders.";"C:\Users\fardi\Desktop\Upload to github\psGuiTextTrace\FilePatternLookup_TestFiles\Subfolder\nested_test.txt"
