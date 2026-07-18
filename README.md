@@ -6,6 +6,26 @@
 
 It is built with **PowerShell** and **XAML**, and is designed for fast inspection of logs, scripts, configuration files, documentation, SQL files, JSON, XML, and other text-based files.
 
+## News :
+
+
+### 1.3
+```
+Must have PowerShell 7.4.0 or later (Core)
+Stop button added
+Better code in the man script
+```
+
+### 1.2
+```
+1.2 : Added support for exporting search results to JSON and HTML formats, in addition to CSV, providing users with more options for analyzing and sharing their findings.
+```
+
+### 1.1
+```
+1.1 : Added support for searching within the Windows Registry and Certificate Stores, allowing users to find specific keys, values, or certificates based on their search criteria.
+```
+
 ## System requirements :
 ### Runtime
 ```
@@ -18,6 +38,7 @@ It is built with **PowerShell** and **XAML**, and is designed for fast inspectio
 ---
 
 ## Table of Contents
+- [News](#news)
 - [System requirements](#system)
 - [Features](#features)
 - [Screenshots](#screenshots)
@@ -46,7 +67,7 @@ It is built with **PowerShell** and **XAML**, and is designed for fast inspectio
 
 ## Screenshots
 
-![](Assets/1.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/1.jpg)
 
 ```
 When matches are found, TextTrace exports the results to a CSV file.
@@ -67,7 +88,7 @@ Report columns:
 ---
 
 ```
-![](Assets/2.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/2.jpg)
 
 TextTrace includes these file patterns by default:
 ```text
@@ -93,9 +114,9 @@ You can also add custom file patterns in the application.
 ```
 Example: *.cs,*.js,*.vbs,*.properties
 ```
-![](Assets/3.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/3.jpg)
 
-![](Assets/4.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/4.jpg)
 
 ```
 Right-click a result row to access available actions:
@@ -107,7 +128,7 @@ Right-click a result row to access available actions:
 | Copy Path | Copies the full file path to the clipboard |
 | Open Reports Folder | Opens the report output folder |
 ```
-![](Assets/5.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/5.jpg)
 
 
 ---
@@ -125,16 +146,6 @@ Find PowerShell variables: \$[A-Za-z_][A-Za-z0-9_]*
 Find XML-like tags: <[^>]+>
 Find email addresses:\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
 ```
-## News
-```
-1.1 :
-Added support for searching within the Windows Registry and Certificate Stores, allowing users to find specific keys, values, or certificates based on their search criteria.
-Added support for exporting search results to JSON and HTML formats, in addition to CSV, providing users with more options for analyzing and sharing their findings.
-```
-![](Assets/111.jpg)
-![](Assets/112.jpg)
-![](Assets/113.jpg)
-![](Assets/114.jpg)
 
 ## PerformanceNotes
 ```
