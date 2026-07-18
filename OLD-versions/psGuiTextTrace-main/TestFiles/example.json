@@ -1,0 +1,10 @@
+{
+  "name": "example",
+  "description": "Detta är ett test i JSON",
+  "words": [
+    "alpha",
+    "beta",
+    "gamma",
+    "test"
+  ]
+}
