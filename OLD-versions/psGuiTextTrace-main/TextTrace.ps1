@@ -23,8 +23,6 @@ News :
 
 #>
 
-Set-StrictMode -Version Latest
-
 # --- Assemblies ---
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
