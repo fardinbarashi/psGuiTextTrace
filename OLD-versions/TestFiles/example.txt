@@ -1,3 +1,0 @@
-Detta är en testfil.
-Här finns ordet test tillsammans med lite andra ord.
-Slut på texten.
