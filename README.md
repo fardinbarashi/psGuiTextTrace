@@ -41,7 +41,6 @@ Better code in the man script
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Regex Examples](#regexexamples)
-- [News](#news)
 - [Performance Notes](#performancenotes)
 - [Roadmap](#roadmap)
 
