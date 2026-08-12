@@ -1,6 +1,0 @@
-name: example
-description: Detta är ett test i YAML
-words:
-  - alpha
-  - beta
-  - gamma
