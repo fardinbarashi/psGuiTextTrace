@@ -47,7 +47,6 @@ Better code in the man script
 ---
 
 ## Features
-- Choose a search scope: Files, Windows Registry, or Certificate store
 - Search inside multiple text-based file formats
 - Select one, many, or all predefined file types
 - Add custom file extensions
@@ -123,9 +122,7 @@ Right-click a result row to access available actions:
 | Open File | Opens the matched file with the default application |
 | Open Containing Folder | Opens File Explorer and selects the matched file |
 | Open in Notepad | Opens the matched file in Notepad |
-| Open in Registry Editor | (Registry scope) Opens regedit at the matched key |
-| View Certificate | (Certificate scope) Opens the matched certificate |
-| Copy Path | Copies the full file path / key path to the clipboard |
+| Copy Path | Copies the full file path to the clipboard |
 | Open Reports Folder | Opens the report output folder |
 ```
 ![](githubRepoContentDeleteIfYouWant/IMG/5.jpg)
