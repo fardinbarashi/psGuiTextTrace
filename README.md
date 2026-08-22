@@ -113,4 +113,5 @@ Enable **Use Regex** before using regex patterns, and make sure the pattern is v
 ---
 
 ## Roadmap
+Browser add to firefox, Chrome and edge
 
