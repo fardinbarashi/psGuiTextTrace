@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextTrace</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header class="bar">
+    <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5"></circle>
+      <line x1="15.5" y1="15.5" x2="21" y2="21"></line>
+    </svg>
+    <h1>Text<span class="accent">Trace</span></h1>
+    <p class="tagline">Search text or use regex in local files</p>
+    <a class="version" id="version" target="_blank" rel="noopener" hidden></a>
+  </header>
+
+  <main>
+    <section class="card controls">
+      <div class="row">
+        <label class="btn-folder">
+          Choose folder…
+          <input type="file" id="folder" webkitdirectory directory multiple hidden>
+        </label>
+        <div class="folder-name" id="folderName" data-empty="true">No folder selected</div>
+      </div>
+
+      <div class="row">
+        <input type="text" id="query" class="field" placeholder="Search Word or use regex" autocomplete="off" spellcheck="false">
+        <button id="run" type="button" class="btn-primary">Search</button>
+        <button id="stop" type="button" class="btn-stop" disabled>Stop</button>
+      </div>
+
+      <div class="row opts">
+        <label><input type="checkbox" id="useRegex"> Regex</label>
+        <label><input type="checkbox" id="caseSensitive"> Case-sensitive</label>
+        <label><input type="checkbox" id="recursive" checked> Include subfolders</label>
+        <label class="maxsize">Max file size <input type="number" id="maxSize" class="num" min="0" step="1" value="20" title="Files larger than this are skipped. 0 = no limit."> MB</label>
+      </div>
+
+      <div class="row types-head">
+        <span class="label">File types</span>
+        <span class="types-actions">
+          <label class="all-files"><input type="checkbox" id="allFiles"> All files</label>
+          <a href="#" id="selectAll">Select all</a>
+          <a href="#" id="clearTypes">Clear</a>
+        </span>
+      </div>
+
+      <div class="ft-grid" id="ftGrid"></div>
+
+      <div class="row custom-row">
+        <span class="label">Custom</span>
+        <input type="text" id="customTypes" class="field" placeholder="Add more extensions, e.g. cs, js, properties" spellcheck="false">
+      </div>
+    </section>
+
+    <div class="stats" id="stats" hidden>
+      <span><b id="stScanned">0</b> files scanned</span>
+      <span><b id="stMatches">0</b> matches</span>
+      <span id="stTime" class="dim">0.00s</span>
+      <span id="stSkippedWrap" hidden title="Files skipped for being larger than the limit"><b id="stSkipped">0</b> skipped</span>
+    </div>
+
+    <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+
+    <section class="card results">
+      <div class="results-head">
+        <h2>Results</h2>
+        <div class="export">
+          <span class="label">Export</span>
+          <button id="exportCsv" type="button" class="btn-export" disabled>CSV</button>
+          <button id="exportJson" type="button" class="btn-export" disabled>JSON</button>
+          <button id="exportHtml" type="button" class="btn-export" disabled>HTML</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="table">
+          <thead>
+            <tr>
+              <th class="c-idx">Index</th>
+              <th class="c-file">Filename</th>
+              <th class="c-type">Type</th>
+              <th class="c-line">Line</th>
+              <th class="c-text">Content</th>
+              <th class="c-path">Path</th>
+              <th class="c-copy"></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div id="empty" class="empty">
+          <div class="empty-title">Choose a folder to begin</div>
+          <div class="empty-sub">Pick a folder, enter a search term, and matches will appear here with the matching text highlighted.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

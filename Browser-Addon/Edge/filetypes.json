@@ -1,0 +1,21 @@
+{
+  "fileTypes": [
+    "*.bat",
+    "*.cmd",
+    "*.config",
+    "*.csv",
+    "*.htm",
+    "*.html",
+    "*.ini",
+    "*.json",
+    "*.log",
+    "*.md",
+    "*.ps1",
+    "*.psm1",
+    "*.sql",
+    "*.txt",
+    "*.xml",
+    "*.yaml",
+    "*.yml"
+  ]
+}

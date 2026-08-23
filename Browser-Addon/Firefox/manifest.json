@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "TextTrace",
+  "version": "2.2.0",
+  "description": "Search text and regex patterns in local files. Pick a folder and the whole tree is searched. Export to CSV/JSON/HTML.",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "texttrace-web@example.com",
+      "strict_min_version": "115.0"
+    }
+  },
+
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "action": {
+    "default_title": "TextTrace — open the searcher",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  }
+}

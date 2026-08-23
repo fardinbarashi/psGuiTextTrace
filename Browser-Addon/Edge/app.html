@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextTrace</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <h1>Text<span class="brand-accent">Trace</span></h1>
+      <span class="version" id="appVersion" hidden></span>
+    </div>
+    <p class="tagline">Search text or use regex in local files</p>
+  </header>
+
+  <main>
+    <section class="panel controls" aria-label="Search settings">
+      <div class="row scope-row">
+        <button id="pickDir" class="btn btn-primary">Choose folder…</button>
+        <div id="dirLabel" class="dir-label" data-empty="true">No folder selected</div>
+      </div>
+
+      <div class="row query-row">
+        <input
+          id="pattern"
+          class="field field-grow"
+          type="text"
+          placeholder="Search Word or use regex"
+          autocomplete="off"
+          spellcheck="false">
+        <button id="search" class="btn btn-go" disabled>Search</button>
+        <button id="stop" class="btn btn-stop" disabled>Stop</button>
+      </div>
+
+      <div class="row options-row">
+        <label class="check"><input type="checkbox" id="useRegex"> Regex</label>
+        <label class="check"><input type="checkbox" id="caseSensitive"> Case-sensitive</label>
+        <label class="check"><input type="checkbox" id="recursive" checked> Include subfolders</label>
+        <label class="sizelim">Max file size
+          <input type="number" id="maxSize" min="1" step="1" value="20"> MB
+        </label>
+      </div>
+
+      <div class="types-block">
+        <div class="types-head">
+          <span class="types-label">File types</span>
+          <div class="types-actions">
+            <label class="check"><input type="checkbox" id="allTypes"> All files</label>
+            <button type="button" class="linkbtn" id="checkAll">Select all</button>
+            <button type="button" class="linkbtn" id="checkNone">Clear</button>
+          </div>
+        </div>
+        <div class="types-grid" id="typesGrid"></div>
+        <div class="row custom-row">
+          <label for="customExt" class="types-label">Custom</label>
+          <input
+            id="customExt"
+            class="field field-grow mono"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Add more extensions, e.g. cs, js, properties">
+        </div>
+      </div>
+    </section>
+
+    <section class="statusbar" aria-live="polite">
+      <span class="stat"><span class="stat-num" id="statScanned">0</span> files scanned</span>
+      <span class="stat"><span class="stat-num accent" id="statMatches">0</span> matches</span>
+      <span class="stat stat-skipped" id="statSkipped" hidden></span>
+      <span class="stat" id="statElapsed"></span>
+      <span class="stat stat-current" id="statCurrent"></span>
+    </section>
+
+    <section class="panel results-panel" aria-label="Results">
+      <div class="results-head">
+        <h2>Results</h2>
+        <div class="export">
+          <span class="export-label">Export</span>
+          <button class="btn btn-ghost" id="exportCsv" disabled>CSV</button>
+          <button class="btn btn-ghost" id="exportJson" disabled>JSON</button>
+          <button class="btn btn-ghost" id="exportHtml" disabled>HTML</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th class="col-index">Index</th>
+              <th class="col-file">Filename</th>
+              <th class="col-type">Type</th>
+              <th class="col-line-no">Line</th>
+              <th class="col-line">Content</th>
+              <th class="col-path">Path</th>
+              <th class="col-act"></th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-title">Choose a folder to begin</div>
+          <div class="empty-sub">Pick a folder, enter a search term, and matches will appear here with the matching text highlighted.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

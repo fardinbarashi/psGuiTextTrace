@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "TextTrace",
+  "version": "1.0",
+  "description": "Search text or use regex in local files within a chosen folder and its subfolders.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open TextTrace",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "clipboardWrite"
+  ]
+}

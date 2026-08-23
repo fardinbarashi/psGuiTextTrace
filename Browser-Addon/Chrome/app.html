@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TextTrace</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap head">
+    <div class="logo">
+      <img src="icons/icon-48.png" alt="" width="30" height="30">
+      <b>Text<span>Trace</span></b>
+      <a class="ver" id="ver" href="https://github.com/fardinbarashi/psGuiTextTrace" target="_blank" rel="noopener" style="display:none"></a>
+    </div>
+    <div class="subtitle">Search text or use regex in local files</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="row">
+      <button class="btn-folder" id="pick">Choose folder…</button>
+      <div class="field folder-name" id="folder" data-empty="true">No folder selected</div>
+    </div>
+
+    <div class="row">
+      <input class="search-input" id="q" placeholder="Search Word or use regex" aria-label="Search Word or use regex">
+      <button class="btn-search" id="go">Search</button>
+      <button class="btn-stop" id="stop" disabled>Stop</button>
+    </div>
+
+    <div class="row checks">
+      <label class="chk"><input type="checkbox" id="regex"> Regex</label>
+      <label class="chk"><input type="checkbox" id="case"> Case sensitive</label>
+      <label class="chk"><input type="checkbox" id="recurse" checked> Include subfolders</label>
+      <label class="chk maxsize">Max size (MB) <input type="number" id="maxsize" min="0" step="1" value="20"></label>
+    </div>
+
+    <div>
+      <div class="types-head">
+        <span class="lbl">File types</span>
+        <div class="right">
+          <label class="chk muted"><input type="checkbox" id="allfiles"> All files</label>
+          <span class="link" id="selall">Select all</span>
+          <span class="link" id="clearall">Clear</span>
+        </div>
+      </div>
+      <div class="types-box">
+        <div class="types-grid" id="types"></div>
+      </div>
+    </div>
+
+    <div class="row custom-row" style="margin-top:16px">
+      <span class="lbl">Custom</span>
+      <input class="field" id="custom" placeholder="Add more extensions, e.g. cs, js, properties" aria-label="Custom extensions">
+    </div>
+  </div>
+
+  <div class="stats" id="stats">
+    <span><b id="scanned">0</b> files searched</span>
+    <span class="m"><b id="hits">0</b> matches</span>
+    <span id="skipped-stat" class="skipped-stat" style="display:none"></span>
+    <span id="time" class="mono">0.00s</span>
+  </div>
+
+  <div class="results">
+    <div class="results-head">
+      <h2>Results</h2>
+      <div class="exp">
+        <span class="exp-lbl">Export</span>
+        <button data-x="csv">CSV</button>
+        <button data-x="json">JSON</button>
+        <button data-x="html">HTML</button>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th class="num">INDEX</th><th>FILENAME</th><th class="type">TYPE</th><th class="line">LINE</th>
+        <th>CONTENT</th><th class="path">PATH</th><th class="copy"></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty">
+      <div class="big">Choose a folder to begin</div>
+      Pick a folder, enter a search term, and matches will appear here with the matching text highlighted.
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
