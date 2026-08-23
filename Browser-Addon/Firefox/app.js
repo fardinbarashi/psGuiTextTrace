@@ -36,7 +36,7 @@ async function loadFileTypes() {
 
 function buildTypes(types) {
   const grid = $("ftGrid");
-  grid.innerHTML = "";
+  grid.replaceChildren();
   for (const ext of types) {
     const label = document.createElement("label");
     const cb = document.createElement("input");
@@ -76,13 +76,17 @@ async function loadVersion() {
 loadVersion();
 
 // ---- Empty state ----------------------------------------------------------
-const EMPTY_HTML =
-  '<div class="empty-title">Choose a folder to begin</div>' +
-  '<div class="empty-sub">Pick a folder, enter a search term, and matches will appear here with the matching text highlighted.</div>';
-
 function resetEmptyState() {
   const e = $("empty");
-  e.innerHTML = EMPTY_HTML;
+  e.replaceChildren();
+  const title = document.createElement("div");
+  title.className = "empty-title";
+  title.textContent = "Choose a folder to begin";
+  const sub = document.createElement("div");
+  sub.className = "empty-sub";
+  sub.textContent = "Pick a folder, enter a search term, and matches will appear here with the matching text highlighted.";
+  e.appendChild(title);
+  e.appendChild(sub);
   e.style.color = "";
   e.style.display = "block";
 }
@@ -175,6 +179,50 @@ function highlight(line, re) {
 
 const tick = () => new Promise((r) => setTimeout(r, 0));
 
+// ---- Safe DOM builders (no innerHTML) -------------------------------------
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function td(cls, text) {
+  const el = document.createElement("td");
+  el.className = cls;
+  if (text != null) el.textContent = String(text);
+  return el;
+}
+
+// Append text nodes + <mark> elements for each match — same result as highlight()
+// but built as real DOM nodes, so no innerHTML is needed.
+function highlightInto(cell, line, re) {
+  re.lastIndex = 0;
+  let last = 0, m;
+  while ((m = re.exec(line)) !== null) {
+    if (m[0].length === 0) { re.lastIndex++; continue; }
+    if (m.index > last) cell.appendChild(document.createTextNode(line.slice(last, m.index)));
+    const mark = document.createElement("mark");
+    mark.textContent = m[0];
+    cell.appendChild(mark);
+    last = m.index + m[0].length;
+  }
+  if (last < line.length) cell.appendChild(document.createTextNode(line.slice(last)));
+}
+
+function copyButton(path) {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.title = "Copy path";
+  btn.dataset.path = path;
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  const rect = document.createElementNS(SVG_NS, "rect");
+  rect.setAttribute("x", "9"); rect.setAttribute("y", "9");
+  rect.setAttribute("width", "11"); rect.setAttribute("height", "11"); rect.setAttribute("rx", "2");
+  const path2 = document.createElementNS(SVG_NS, "path");
+  path2.setAttribute("d", "M5 15V5a2 2 0 0 1 2-2h10");
+  svg.appendChild(rect); svg.appendChild(path2);
+  btn.appendChild(svg);
+  return btn;
+}
+
 // ---- Search ---------------------------------------------------------------
 async function search() {
   if (running) return;
@@ -197,7 +245,7 @@ async function search() {
   const maxBytes = lastMaxMB ? lastMaxMB * 1024 * 1024 : Infinity;
   $("run").disabled = true; $("stop").disabled = false;
   disableExports(true);
-  $("rows").innerHTML = "";
+  $("rows").replaceChildren();
   $("empty").style.display = "none";
 
   const t0 = performance.now();
@@ -249,32 +297,33 @@ async function search() {
   setTimeout(() => ($("progress").style.width = "0%"), 600);
 }
 
-const COPY_SVG =
-  '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect>' +
-  '<path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>';
-
 function renderRows(searchRe) {
   const body = $("rows");
-  body.innerHTML = "";
+  body.replaceChildren();
   const shown = results.slice(0, MAX_ROWS_SHOWN);
   const frag = document.createDocumentFragment();
   for (const r of shown) {
     const tr = document.createElement("tr");
-    tr.innerHTML =
-      '<td class="c-idx">' + r.index + "</td>" +
-      '<td class="c-file">' + esc(r.fileName) + "</td>" +
-      '<td class="c-type">' + esc(r.type) + "</td>" +
-      '<td class="c-line">' + r.lineNumber + "</td>" +
-      '<td class="c-text">' + highlight(r.line, searchRe) + "</td>" +
-      '<td class="c-path">' + esc(r.path) + "</td>" +
-      '<td class="c-copy"><button class="copy-btn" title="Copy path" data-path="' + esc(r.path) + '">' + COPY_SVG + "</button></td>";
+    tr.appendChild(td("c-idx", r.index));
+    tr.appendChild(td("c-file", r.fileName));
+    tr.appendChild(td("c-type", r.type));
+    tr.appendChild(td("c-line", r.lineNumber));
+    const content = td("c-text");
+    highlightInto(content, r.line, searchRe);
+    tr.appendChild(content);
+    tr.appendChild(td("c-path", r.path));
+    const copyCell = document.createElement("td");
+    copyCell.className = "c-copy";
+    copyCell.appendChild(copyButton(r.path));
+    tr.appendChild(copyCell);
     frag.appendChild(tr);
   }
   body.appendChild(frag);
   if (results.length > MAX_ROWS_SHOWN) {
     const tr = document.createElement("tr");
-    tr.innerHTML = '<td class="c-path" colspan="7">… ' +
-      (results.length - MAX_ROWS_SHOWN) + " more matches hidden, but included in the export.</td>";
+    const cell = td("c-path", "… " + (results.length - MAX_ROWS_SHOWN) + " more matches hidden, but included in the export.");
+    cell.colSpan = 7;
+    tr.appendChild(cell);
     body.appendChild(tr);
   }
   $("empty").style.display = results.length ? "none" : "block";
