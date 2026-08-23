@@ -74,7 +74,7 @@ Better code in the man script
 
 ## Browser
 
-![](githubRepoContentDeleteIfYouWant/IMG/browser.jpg)
+![](githubRepoContentDeleteIfYouWant/IMG/browser1.jpg)
 
 One tool, three builds: **Chrome**, **Microsoft Edge** and **Firefox**.
 No install wizard, no indexing, no server. The folder you pick never leaves your machine.
