@@ -19,11 +19,14 @@ Structure :
     the top. Dot-sourcing only defines them; they are not called until a button
     is clicked, by which point every control exists.
 
-Version : 1.4
+Version : 1.3
 Release day : 2026-06-08
 Github Link : https://github.com/fardinbarashi/psGuiTextTrace
 
-
+News :
+2026-07-18
+ - added a stop button
+ - better code in the main script
 #>
 
 
@@ -126,6 +129,7 @@ $CmOpenNotepad   = Get-WpfControl 'CmOpenNotepad'
 $CmCopyPath      = Get-WpfControl 'CmCopyPath'
 $CmOpenReports   = Get-WpfControl 'CmOpenReports'
 $ChkAllFileTypes = Get-WpfControl 'ChkAllFileTypes'
+$BtnReloadTypes  = Get-WpfControl 'BtnReloadTypes'
 $RbScopeFiles    = Get-WpfControl 'RbScopeFiles'
 $RbScopeRegistry = Get-WpfControl 'RbScopeRegistry'
 $RbScopeCert     = Get-WpfControl 'RbScopeCert'
@@ -144,22 +148,9 @@ $Results = New-Object System.Collections.ObjectModel.ObservableCollection[object
 $ResultsGrid.ItemsSource = $Results
 $script:RowIndex = 0
 
-# File extensions are read from Settings\Config\filetypes.json (edit that file
-# to add or remove types). They are sorted alphabetically before display. A
-# fallback list is used if the JSON is missing or unreadable.
+# File extensions live in Settings\Config\filetypes.json. Update-FileTypeList
+# (below) reads and sorts them, at startup and whenever Reload is clicked.
 $FileTypesFile = Join-Path $ScriptRoot 'Settings\Config\filetypes.json'
-$FileTypeList  = @()
-if (Test-Path $FileTypesFile) {
-    try {
-        $ft = Get-Content -Raw -Encoding UTF8 $FileTypesFile | ConvertFrom-Json
-        if ($ft.fileTypes) { $FileTypeList = @($ft.fileTypes) }
-    } catch {}
-}
-if (-not $FileTypeList -or $FileTypeList.Count -eq 0) {
-    $FileTypeList = @('*.xml','*.txt','*.log','*.csv','*.json','*.ini','*.config',
-                      '*.html','*.htm','*.ps1','*.psm1','*.bat','*.cmd','*.md','*.yaml','*.yml','*.sql')
-}
-$FileTypeList = @($FileTypeList | Sort-Object)
 
 $script:IsUpdatingFileTypeChecks = $false
 
@@ -177,32 +168,53 @@ foreach ($file in $functionFiles) {
 
 #------------------------------- File-type checkboxes -------------------------------
 
-foreach ($type in $FileTypeList) {
-    $check = New-Object System.Windows.Controls.CheckBox
-    $check.Content = $type
-    $check.Margin = '2'
-    if ($type -eq '*.xml') { $check.IsChecked = $true }
+# Reads filetypes.json (with a built-in fallback), sorts alphabetically, and
+# rebuilds the file-type checkboxes. Called at startup and by the Reload button.
+function Update-FileTypeList {
+    $list = @()
+    if (Test-Path $FileTypesFile) {
+        try {
+            $ft = Get-Content -Raw -Encoding UTF8 $FileTypesFile | ConvertFrom-Json
+            if ($ft.fileTypes) { $list = @($ft.fileTypes) }
+        } catch {}
+    }
+    if (-not $list -or $list.Count -eq 0) {
+        $list = @('*.xml','*.txt','*.log','*.csv','*.json','*.ini','*.config',
+                  '*.html','*.htm','*.ps1','*.psm1','*.bat','*.cmd','*.md','*.yaml','*.yml','*.sql')
+    }
+    $list = @($list | Sort-Object)
 
-    $check.Add_Checked({
-        if ($script:IsUpdatingFileTypeChecks) { return }
-        $allChecked = $true
-        foreach ($item in $TypesList.Items) {
-            if ($item.IsChecked -ne $true) { $allChecked = $false; break }
-        }
-        $script:IsUpdatingFileTypeChecks = $true
-        $ChkAllFileTypes.IsChecked = $allChecked
-        $script:IsUpdatingFileTypeChecks = $false
-    })
+    $script:IsUpdatingFileTypeChecks = $true
+    $TypesList.Items.Clear()
+    foreach ($type in $list) {
+        $check = New-Object System.Windows.Controls.CheckBox
+        $check.Content = $type
+        $check.Margin = '2'
+        if ($type -eq '*.xml') { $check.IsChecked = $true }
 
-    $check.Add_Unchecked({
-        if ($script:IsUpdatingFileTypeChecks) { return }
-        $script:IsUpdatingFileTypeChecks = $true
-        $ChkAllFileTypes.IsChecked = $false
-        $script:IsUpdatingFileTypeChecks = $false
-    })
-
-    [void]$TypesList.Items.Add($check)
+        $check.Add_Checked({
+            if ($script:IsUpdatingFileTypeChecks) { return }
+            $allChecked = $true
+            foreach ($item in $TypesList.Items) {
+                if ($item.IsChecked -ne $true) { $allChecked = $false; break }
+            }
+            $script:IsUpdatingFileTypeChecks = $true
+            $ChkAllFileTypes.IsChecked = $allChecked
+            $script:IsUpdatingFileTypeChecks = $false
+        })
+        $check.Add_Unchecked({
+            if ($script:IsUpdatingFileTypeChecks) { return }
+            $script:IsUpdatingFileTypeChecks = $true
+            $ChkAllFileTypes.IsChecked = $false
+            $script:IsUpdatingFileTypeChecks = $false
+        })
+        [void]$TypesList.Items.Add($check)
+    }
+    $ChkAllFileTypes.IsChecked = $false
+    $script:IsUpdatingFileTypeChecks = $false
 }
+
+Update-FileTypeList
 
 $ChkAllFileTypes.Add_Checked({
     if ($script:IsUpdatingFileTypeChecks) { return }
@@ -250,6 +262,11 @@ $BtnBrowse.Add_Click({
 $BtnSearch.Add_Click({ Invoke-Search })
 
 $BtnStop.Add_Click({ Stop-Search })
+
+$BtnReloadTypes.Add_Click({
+    Update-FileTypeList
+    Set-UiStatus -Text 'File types reloaded from filetypes.json'
+})
 
 $BtnClear.Add_Click({
     if ($script:SearchJob) { Stop-Search }

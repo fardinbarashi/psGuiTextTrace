@@ -2,10 +2,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="TextTrace"
-    Width="1280"
-    Height="980"
-    MinWidth="980"
-    MinHeight="640"
+    Width="1400"
+    Height="1000"
+    MinWidth="1400"
+    MinHeight="1000"
     WindowStartupLocation="CenterScreen"
     Background="#F5F7FA"
     FontFamily="Segoe UI"
@@ -116,6 +116,69 @@
             </Setter>
         </Style>
 
+        <Style x:Key="GreenButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#2E9E5B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#2E9E5B"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#268A4F"/></Trigger>
+                            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#1F7343"/></Trigger>
+                            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RedButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#D64545"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D64545"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#C23A3A"/></Trigger>
+                            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#A83232"/></Trigger>
+                            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="YellowButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#F2C037"/>
+            <Setter Property="Foreground" Value="#1A1D22"/>
+            <Setter Property="BorderBrush" Value="#F2C037"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#E6B12A"/></Trigger>
+                            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#D19E1E"/></Trigger>
+                            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="Card" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
@@ -193,7 +256,7 @@
                                 <ColumnDefinition Width="140"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0" Name="TxtPath"/>
-                            <Button Grid.Column="2" Name="BtnBrowse" Content="Browse..." Style="{StaticResource ModernButton}"/>
+                            <Button Grid.Column="2" Name="BtnBrowse" Content="Browse..." Style="{StaticResource GreenButton}"/>
                         </Grid>
                         <TextBlock Name="LblPathHint" Text="" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
 
@@ -203,6 +266,7 @@
                             <Border BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="1" CornerRadius="8" Height="154">
                                 <ListBox Name="TypesList" BorderThickness="0" Padding="6"/>
                             </Border>
+                            <Button Name="BtnReloadTypes" Content="Reload file types" Style="{StaticResource YellowButton}" Height="28" Padding="12,2" Margin="0,6,0,0" HorizontalAlignment="Left"/>
 
                             <TextBlock Text="Custom File Types" Style="{StaticResource SectionLabel}"/>
                             <TextBlock Text="Comma-separated, for example: *.cs,*.vbs" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" Margin="0,0,0,6"/>
@@ -226,9 +290,9 @@
                                 <ColumnDefinition Width="8"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Name="BtnSearch" Content="Search" Style="{StaticResource PrimaryButton}"/>
-                            <Button Grid.Column="2" Name="BtnStop" Content="Stop" Style="{StaticResource ModernButton}" IsEnabled="False"/>
-                            <Button Grid.Column="4" Name="BtnClear" Content="Clear" Style="{StaticResource ModernButton}"/>
+                            <Button Grid.Column="0" Name="BtnSearch" Content="Search" Style="{StaticResource GreenButton}"/>
+                            <Button Grid.Column="2" Name="BtnStop" Content="Stop" Style="{StaticResource RedButton}" IsEnabled="False"/>
+                            <Button Grid.Column="4" Name="BtnClear" Content="Clear" Style="{StaticResource YellowButton}"/>
                         </Grid>
 
                         <Border Background="#F8F9FB" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,18,0,0">
