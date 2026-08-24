@@ -79,6 +79,8 @@ Better code in the man script
 One tool, three builds: **Chrome**, **Microsoft Edge** and **Firefox**.
 No install wizard, no indexing, no server. The folder you pick never leaves your machine.
 
+![Browser-Addons](https://github.com/fardinbarashi/psGuiTextTrace/tree/main/Browser-Addon)
+
 Search text and regex patterns across your local files.
 Pick a folder, and the whole tree is searched. Results can be exported to CSV, JSON, or HTML.
 
