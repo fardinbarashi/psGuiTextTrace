@@ -5,6 +5,8 @@ PSVersion 7.4.0
 About Script :
 Author : Fardin Barashi
 Title : TextTrace
+Version : 1.4
+Release day : 2026-08-27
 Description : A XAML-based PowerShell tool that searches files, the registry and
               certificate stores for a keyword or pattern, and exports matches
               to CSV, JSON or HTML.
@@ -14,19 +16,8 @@ Structure :
     Settings\UI\MainWindow.xaml      The whole window, as XAML.
     Settings\Functions\*.ps1         One function per file, dot-sourced below.
 
-    Load order matters. The functions reach WPF controls like $ProgressBar by
-    name, so they are dot-sourced AFTER the controls have been created - not at
-    the top. Dot-sourcing only defines them; they are not called until a button
-    is clicked, by which point every control exists.
-
-Version : 1.3
-Release day : 2026-06-08
 Github Link : https://github.com/fardinbarashi/psGuiTextTrace
 
-News :
-2026-07-18
- - added a stop button
- - better code in the main script
 #>
 
 
